@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dboiheg0168vo"]
+
+[ext_resource type="Script" uid="uid://h7k7on53g8hj" path="res://monster.gd" id="1_vb3nq"]
+[ext_resource type="Texture2D" uid="uid://crrgi1omsjt4a" path="res://Screenshot 2026-09-27 014031.png" id="2_ssiii"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uly5j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uly5j"]
+
+[node name="Monster" type="CharacterBody2D" unique_id=1837267773]
+script = ExtResource("1_vb3nq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=391848473]
+offset_left = -32.0
+offset_top = -14.0
+offset_right = 44.0
+offset_bottom = 12.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=905045294]
+shape = SubResource("RectangleShape2D_uly5j")
+
+[node name="Screenshot20260927014031" type="Sprite2D" parent="." unique_id=660170682]
+position = Vector2(5.999977, -1.0000057)
+scale = Vector2(0.3320531, 0.34903845)
+texture = ExtResource("2_ssiii")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=862014357]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=611823669]
+shape = SubResource("CircleShape2D_uly5j")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

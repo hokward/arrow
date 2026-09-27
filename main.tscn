@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://co7occrbjpfdk"]
+
+[ext_resource type="Texture2D" uid="uid://dnfieg5si82hd" path="res://Background.png" id="1_7mycd"]
+[ext_resource type="Script" uid="uid://bqscbsxlh6mtg" path="res://main.gd" id="1_272bh"]
+[ext_resource type="Script" uid="uid://20g0xy6qlnu" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b0pe4mwewms8b" path="res://sword.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://667mc5t28gyg" path="res://Screenshot 2026-09-27 005350.png" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dboiheg0168vo" path="res://Monster.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dumklqck6ntlk" path="res://Screenshot 2026-09-27 014120.png" id="4_lquwl"]
+[ext_resource type="AudioStream" uid="uid://b6hxlrnu8wwk" path="res://WhatsApp Audio 2026-09-27 at 1.30.38 PM.ogg" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://dvb8y1xwuc0so" path="res://button.gd" id="9_kek77"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uly5j"]
+size = Vector2(1098, 520)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27nea"]
+size = Vector2(1060, 590)
+
+[node name="Main" type="Node2D" unique_id=1803931169]
+script = ExtResource("1_272bh")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1959604682]
+position = Vector2(574.00006, 293.24997)
+scale = Vector2(1.2958964, 1.6137217)
+texture = ExtResource("1_7mycd")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=635495739]
+script = ExtResource("1_ig7tw")
+
+[node name="ColorRect" type="ColorRect" parent="Player" unique_id=1893901031]
+offset_left = 257.0
+offset_top = 315.0
+offset_right = 363.0
+offset_bottom = 336.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=821201565]
+position = Vector2(583, 270)
+shape = SubResource("RectangleShape2D_uly5j")
+
+[node name="Sword" type="Area2D" parent="Player" unique_id=1485021137]
+script = ExtResource("2_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="Player/Sword" unique_id=623899959]
+offset_left = 39.0
+offset_top = 53.0
+offset_right = 85.0
+offset_bottom = 83.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sword" unique_id=689126287]
+position = Vector2(568, 339)
+shape = SubResource("RectangleShape2D_27nea")
+
+[node name="Screenshot20260927005350" type="Sprite2D" parent="Player" unique_id=44241291]
+position = Vector2(74, 121)
+scale = Vector2(0.19220237, 0.26019925)
+texture = ExtResource("3_h2yge")
+
+[node name="Screenshot20260927014120" type="Sprite2D" parent="Player" unique_id=625578981]
+position = Vector2(301.99997, 323)
+scale = Vector2(0.2913487, 0.30563384)
+texture = ExtResource("4_lquwl")
+
+[node name="Monster" parent="." unique_id=1837267773 instance=ExtResource("4_1bvp3")]
+position = Vector2(549, 95)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2085199330]
+
+[node name="Label" type="Label" parent="UI" unique_id=1288454404]
+process_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "0"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=902168221]
+position = Vector2(-3, 9)
+stream = ExtResource("8_5vw27")
+autoplay = true
+
+[node name="StartScreen" type="CanvasLayer" parent="." unique_id=1027676056]
+process_mode = 2
+
+[node name="Button" type="Button" parent="StartScreen" unique_id=444611789]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 6.1035156e-05
+offset_top = -15.5000305
+offset_right = 97.0
+offset_bottom = 15.4999695
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY GAME"
+script = ExtResource("9_kek77")
+
+[node name="Timer" type="Timer" parent="." unique_id=2012570588]
+wait_time = 2.7689999999999997
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Player/Sword" to="Player/Sword" method="_on_body_entered"]
+[connection signal="pressed" from="StartScreen/Button" to="." method="_on_button_pressed"]
